@@ -3,7 +3,7 @@
 <div class="card mt-2">
   <div class="card-header"><strong>@{{ post.author.username }}</strong>
     {% if post.image %}
-    <img src="{{post.image.url}}" width="400">
+    <img src="{{post.image.url}}" width="400" loading="lazy">
     {% endif %}
   </div>
   <div class="card-body d-flex flex-row justify-content-between">

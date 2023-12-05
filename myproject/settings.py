@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    # 'lazyload',
     # 'rest_framework'
 ]
 
