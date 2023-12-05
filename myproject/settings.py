@@ -133,5 +133,5 @@ LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
 
 #Photo upload
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'

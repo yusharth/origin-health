@@ -41,7 +41,7 @@ def home(request):
 @permission_required("myapp.add_post", login_url="/login", raise_exception=True)
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
