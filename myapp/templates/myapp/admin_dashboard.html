@@ -1,0 +1,32 @@
+<!-- myapp/admin_dashboard.html -->
+{% extends 'myapp/base.html' %} {% block title %}Admin Dashboard{% endblock %} 
+<!-- Display existing labels -->
+{% for label in labels %}
+    <p>{{ label.name }}</p>
+{% endfor %}
+
+<!-- Create new label form -->
+<form method="post" action="{% url 'admin_dashboard' %}">
+    {% csrf_token %}
+    {{ label_form.as_p }}
+    <input type="submit" value="Create Label">
+</form>
+
+<!-- Delete labels form -->
+<form method="post" action="{% url 'admin_dashboard' %}">
+    {% csrf_token %}
+    <input type="hidden" name="labels_to_delete" value="{{ labels|join:',' }}">
+    <input type="submit" value="Delete Selected Labels">
+</form>
+
+<!-- Image upload form -->
+<form method="post" action="{% url 'admin_dashboard' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ image_form.as_p }}
+    <input type="submit" value="Upload Image">
+</form>
+
+<!-- Display existing images -->
+{% for post in posts %}
+    <img src="{{ post.image.url }}" alt="Image">
+{% endfor %}

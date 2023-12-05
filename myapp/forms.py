@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post,Label
 
 
 class RegisterForm(UserCreationForm):
@@ -15,4 +15,14 @@ class RegisterForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ["author", "title", "description", "image"]
+        fields = ["author", "label", "image"]
+
+class LabelForm(forms.ModelForm):
+    class Meta:
+        model = Label
+        fields = ['name']
+
+class ImageUploadForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['image', 'label']
