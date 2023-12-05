@@ -1,13 +1,11 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import login,logout
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
 # Create your views here.
 from django.http import HttpResponse
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
+@login_required(login_url="/login")
 def home(request):
     return render(request,'myapp/home.html')
 
