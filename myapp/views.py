@@ -9,6 +9,9 @@ from django.http import HttpResponse
 
 @login_required(login_url="/login")
 def home(request):
+    if request.user.is_superuser:
+        print("Print HEREASDFADSFDSAFS")
+        return redirect('admin_dashboard')
     posts = Post.objects.all()
     print("ROUND1")
     if request.method == "POST":
@@ -35,12 +38,35 @@ def home(request):
                     group.user_set.remove(user)
                 except:
                     pass
-    if request.user.is_superuser:
-        print("Print HEREASDFADSFDSAFS")
-        return redirect('admin_dashboard')
 
     return render(request, 'myapp/home.html', {"posts": posts})
 
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_dashboard(request):
+#     labels = Label.objects.all()
+#     posts = Post.objects.all()
+
+#     if request.method == "POST":
+#         # Handling label creation
+#         label_form = LabelForm(request.POST)
+#         if label_form.is_valid():
+#             label_form.save()
+
+#         # Handling label deletion
+#         labels_to_delete = request.POST.getlist('labels_to_delete')
+#         if labels_to_delete:
+#             Label.objects.filter(id__in=labels_to_delete).delete()
+
+#         # Handling image upload
+#         image_form = ImageUploadForm(request.POST, request.FILES)
+#         if image_form.is_valid():
+#             image_form.save()
+
+#     else:
+#         label_form = LabelForm()
+#         image_form = ImageUploadForm()
+
+#     return render(request, 'myapp/admin_dashboard.html', {"labels": labels, "posts": posts, "label_form": label_form, "image_form": image_form})
 @user_passes_test(lambda u: u.is_superuser)
 def admin_dashboard(request):
     labels = Label.objects.all()
